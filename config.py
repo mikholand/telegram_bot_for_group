@@ -1,0 +1,2 @@
+TOKEN = '0000000000:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'    # Подставить свое значение Bot API, которое нужно получить у бота @BotFather
+SHEET = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'      # Подставить свою таблицу
