@@ -1,44 +1,54 @@
-# handsome_man
-Telegram Bot for random identification of a handsome man in a chat. <br><br>
-Телеграм бот для рандомного определения красавчика в чате. <br>
+# telegram_bot_for_group
+Multifunctional Telegram Bot for group. <br><br>
+Бот выполняет несколько функций, включая получение текущей погоды, 
+конвертацию валют, отправку случайных картинок с милыми животными и 
+создание опросов в групповых чатах, а также в нем присутствует игра
+для рандомного определения красавчика в чате. <br>
 Сделан исключительно 4fun. Можно дополнять другими номинациями.
 
 ## Запуск бота
-- установить Python 3.9 с [официального сайта](https://www.python.org/)
-- установить Aiogram и gspread с помощью команд:
+Для использования этого скрипта вам нужно следовать следующей инструкции:
+1. Установите Python 3.10 с [официального сайта](https://www.python.org/)
+2. Клонируйте репозиторий или загрузите файлы кода.
+```sh
+git clone https://github.com/mikholand/telegram_bot_for_group.git
 ```
-pip install -U aiogram
-pip install gspread
+3. Установите необходимые зависимости с помощью pip.
+```sh
+pip install -r requirements.txt
 ```
-- изменить файл `config.py`
-  - подставить в `TOKEN` свое значение Bot API, которое нужно получить у бота @BotFather
-  - подставить в `SHEET` свою таблицу
-- запустить самого бота 
+4. Создайте нового бота и получите API-токен от BotFather в Telegram.
+5. Измените файл .env.example в корневой папке проекта на .env и внесите в
+него изменения, которые там нужны
+6. Запустите скрипт.
 ```
-python bot_handsome_man.py
+python main.py
 ```
 
-## Подключение таблицы Google(БД) к боту
-1. Перейдите в [Google Developers Console](https://console.developers.google.com/) и создайте новый проект (или выберите тот, который у вас уже есть).
-2. В поле [«Search for APIs and Services»](https://console.cloud.google.com/apis/library) найдите «Google Drive API» и включите его.
-3. В поле [«Search for APIs and Services»](https://console.cloud.google.com/apis/library) найдите «Google Sheets API» и включите его.
-4. Перейдите в «APIs & Services > Credentials» и выберите «Create credentials > Service account key».
-5. Заполните форму
-6. Нажмите «Create» и «Done».
-7. Нажмите «Manage service accounts» в строке «Service Accounts».
-8. Нажмите на ⋮ рядом с недавно созданной учетной записью службы и выберите «Manage keys», а затем нажмите «ADD KEY > Create new key».
-9. Выберите тип ключа JSON и нажмите «Create».
-10. Будет скачан файл следующего вида:
-```
-{
-    "type": "service_account",
-    "project_id": "api-project-XXX",
-    "private_key_id": "2cd … ba4",
-    "private_key": "-----BEGIN PRIVATE KEY-----\nNrDyLw … jINQh/9\n-----END PRIVATE KEY-----\n",
-    "client_email": "473000000000-yoursisdifferent@developer.gserviceaccount.com",
-    "client_id": "473 … hd.apps.googleusercontent.com",
-    ...
-}
-```
-11. Перейдите к своей электронной таблице и поделитесь ею с "client_email" из шага выше. Точно так же, как и с любой другой учетной записью Google. Если вы этого не сделаете, вы получите исключение "gspread.exceptions.SpreadsheetNotFound" при попытке доступа к этой электронной таблице из вашего приложения или скрипта.
-12. Переместите загруженный файл в ./gspread/service_account.json.
+## Использование
+После запуска бота вы можете взаимодействовать с ним через приложение 
+Telegram. Начните чат с ботом и следуйте инструкциям, чтобы получить 
+доступ к различным функциям:
+1. /weather - Определить текущую погоду в определенном городе.
+2. /currency - Конвертировать валюты.
+3. /animals - Отправить случайную картинку с милыми животными.
+4. /poll - Создать опрос в групповом чате.
+5. /cancel или "Отмена" - Отменить текущее действие.
+
+А также присутствуют команды для чатиков:
+1. /reg - Регистрация в игре "Красавчик дня".
+2. /hm_day - Собственно сам красавчик дня.
+3. /hm_my_count - Моя статистика в игре.
+'''
+
+## Лицензия
+Этот скрипт распространяется на условиях лицензии MIT. 
+Подробности смотрите в файле
+[LICENSE](https://github.com/mikholand/telegram_bot_for_group/blob/master/LICENSE).
+
+## Контакты
+Михно Олег - [Telegram](https://t.me/mikholand) - mikholand@gmail.com
+
+GitHub: [https://github.com/mikholand](https://github.com/mikholand)
+
+LinkedIn: [https://www.linkedin.com/in/mikholand/](https://www.linkedin.com/in/mikholand/)
