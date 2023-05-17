@@ -33,6 +33,15 @@ async def score_count(message: types.Message):
     await message.answer(text)
 
 
+async def score_top5(message: types.Message):
+    """ТОП-5 игроков.
+
+    Показывает статистику ТОП-5 участников игры в чате.
+    """
+    text = await database.score_top()
+    await message.answer(text, parse_mode='MarkdownV2')
+
+
 # async def score_test(message: types.Message):
 #     """Тестовая функция.
 
@@ -50,4 +59,5 @@ def register_handsome_man_handlers(dp: Dispatcher):
     dp.register_message_handler(reg_handsome_man, commands=['reg'])
     dp.register_message_handler(score_add, commands=['hm_day'])
     dp.register_message_handler(score_count, commands=['hm_my_count'])
+    dp.register_message_handler(score_top5, commands=['hm_top5'])
     # dp.register_message_handler(score_test, commands=['score_test'])

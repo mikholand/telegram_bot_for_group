@@ -43,7 +43,14 @@ class DBCommands:
     SCORE_DATE_LAST = 'SELECT last_scored FROM handsome_man WHERE chat_id=$1' \
                       'ORDER BY last_scored DESC LIMIT 1'
     SCORE_TEST = 'SELECT * FROM handsome_man'
-    SCORE_TABLE = 'SELECT user_id, score FROM handsome_man WHERE chat_id=$1 ORDER BY score DESC LIMIT 5'
+    SCORE_TABLE_TOP5 = '''
+                        SELECT h.user_id, u.full_name, h.score
+                        FROM handsome_man AS h
+                        LEFT JOIN users AS u
+                        ON u.user_id=h.user_id
+                        WHERE chat_id=$1
+                        ORDER BY score DESC LIMIT 5
+                       '''
 
     async def add_new_user(self, referral=None):
         """Добавление нового пользователя в БД.
@@ -159,6 +166,21 @@ class DBCommands:
         last_score = score_count[0][1]
         return f'Ты был красавчиком {score} раз. В последний раз это было {last_score}'
 
+    async def score_top(self):
+        """Тестовая функция.
+
+        Для разного рода тестов по игре.
+        """
+        chat_id = types.Chat.get_current().id
+        table_top5 = await self.pool.fetch(self.SCORE_TABLE_TOP5, chat_id)
+        text = 'ТОП\\-5 красавчиков дня\\:\n'
+        for num in range(len(table_top5)):
+            user_id = table_top5[num][0]
+            full_name = table_top5[num][1]
+            score = table_top5[num][2]
+            text += '{0}\\. [{1}](tg://user?id={2}) набрал {3} очков\\.\n'.format(num + 1, full_name, user_id, score)
+        return text
+
     async def score_test(self):
         """Тестовая функция.
 
@@ -166,7 +188,7 @@ class DBCommands:
         """
         # user_id = types.User.get_current().id
         chat_id = types.Chat.get_current().id
-        test = await self.pool.fetch(self.SCORE_TABLE, chat_id)
+        test = await self.pool.fetch(self.SCORE_TABLE_TOP5, chat_id)
         # score_count = await self.pool.fetchval(self.SCORE_COUNT, user_id, chat_id)
         # score_select = await self.pool.fetchval(self.SCORE_DATE_LAST, chat_id)
         print(test)
