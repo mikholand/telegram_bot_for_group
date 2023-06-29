@@ -1,6 +1,7 @@
 from aiogram import Dispatcher, types
 
 from config import bot_admin_id
+from load_all import bot
 from utils.dbcommands import DBCommands
 
 database = DBCommands()
@@ -25,6 +26,15 @@ async def count_users(message: types.Message):
         await message.answer(f'Сейчас в БД {count_users} юзеров')
 
 
+async def answer_message(message: types.Message):
+    text = message.text[8:]
+    for i in range(14):
+        if text[:i].isdigit():
+            id = text[:i]
+            k = i
+    await bot.send_message(id, text[k:])
+
+
 async def test_contact(message: types.Contact):
     print(message)
 
@@ -42,7 +52,8 @@ def register_test_handlers(dp: Dispatcher):
 
     Регистрирует все тестовые обработчики событий.
     """
-    dp.register_message_handler(test, commands=['test'])
+    dp.register_message_handler(answer_message, commands=['answer'])
     dp.register_message_handler(count_users, commands=['count_users'])
+    dp.register_message_handler(test, commands=['test'])
     dp.register_message_handler(test_contact, content_types=types.ContentType.CONTACT)
     dp.register_message_handler(all_handler)
