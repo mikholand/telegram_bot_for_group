@@ -19,7 +19,7 @@ CREATE TABLE chats
 CREATE TABLE handsome_man
 (
 	user_id     bigint REFERENCES users(user_id),
-	chat_id     bigint REFERENCES chats(id),
+	chat_id     bigint REFERENCES chats(chat_id),
 	CONSTRAINT handsome_man_pk PRIMARY KEY (user_id, chat_id),
 	score       int,
 	last_scored date            NOT NULL

@@ -25,6 +25,10 @@ async def count_users(message: types.Message):
         await message.answer(f'Сейчас в БД {count_users} юзеров')
 
 
+async def test_contact(message: types.Contact):
+    print(message)
+
+
 async def all_handler(message: types.Message):
     """Обработчик всех сообщений.
 
@@ -40,4 +44,5 @@ def register_test_handlers(dp: Dispatcher):
     """
     dp.register_message_handler(test, commands=['test'])
     dp.register_message_handler(count_users, commands=['count_users'])
+    dp.register_message_handler(test_contact, content_types=types.ContentType.CONTACT)
     dp.register_message_handler(all_handler)

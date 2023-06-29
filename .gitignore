@@ -67,3 +67,10 @@ nitpick
 .editorconfig
 *.toml
 setup.cfg
+
+# Database
+db.sqlite3
+
+# Test
+./handlers/test.py
+run.bat

@@ -1,4 +1,5 @@
 from .animals import register_animals_handlers
+from .chatterbot import register_chatterbot_handlers
 from .common import register_common_handlers
 from .currency import register_currency_handlers
 from .handsome_man import register_handsome_man_handlers
